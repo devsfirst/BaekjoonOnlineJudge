@@ -1,7 +1,9 @@
 # BaekjoonOnlineJudge
-'''
+
 ## 커밋 양식
-파일이름: [문제 번호] 문제 제목
-커밋메시지
-성공: correct
-실패: wrong(compile error, timeout, etc.)
+### 파일 이름
+[문제 번호] 파일 이름
+
+### 커밋 메시지
++ 정답: correct
++ 실패: wrong(원인)
