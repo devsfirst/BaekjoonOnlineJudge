@@ -17,16 +17,21 @@ public class Main {
         int btnEven = N / 2;
         int btnOdd = N % 2 == 0 ? N / 2 : N / 2 + 1;
         int btn3k = (N - 1) / 3 + 1;
-        int num = 0;
+        int num = 1;
 
-        if (0 <= m) num++;
         if (btnAll <= m) num++;
-        if (btnEven <= m) num++;
-        if (btnOdd <= m) num++;
-        if (btn3k <= m) num++;
-        if (btnAll + btn3k <= m) num++;
-        if (btnEven + btn3k <= m) num++;
-        if (btnOdd + btn3k <= m) num++;
+
+        if (N >= 2) {
+            if (btnEven <= m) num++;
+            if (btnOdd <= m) num++;
+        }
+        
+        if (N >= 3) {
+            if (btn3k <= m) num++;
+            if (btnAll + btn3k <= m) num++;
+            if (btnEven + btn3k <= m) num++;
+            if (btnOdd + btn3k <= m) num++;
+        }
 
         System.out.println(num);
     }
