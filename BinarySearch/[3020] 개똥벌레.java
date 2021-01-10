@@ -40,7 +40,7 @@ public class Main {
                 }
             }
 
-            // 더 적은 장애물
+            /// 더 적은 장애물
             if (obstacle < min) {
                 min = obstacle;
                 minNum = 1;
