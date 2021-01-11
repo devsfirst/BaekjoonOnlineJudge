@@ -6,47 +6,49 @@ import java.util.StringTokenizer;
 public class Main {
     private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     private static StringTokenizer st;
-    private static int[] arr;
+    private static int N;
+    private static int H;
+    private static int[] height;
+    private static int[] obstacle;
+    private static int minObstacle;
+    private static int num = 2;
 
     public static void main(String[] args) throws IOException {
         st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int H = Integer.parseInt(st.nextToken());
-        arr = new int[N];
-        int min = N / 2;
-        int minNum = 2;
+        N = Integer.parseInt(st.nextToken());
+        H = Integer.parseInt(st.nextToken());
+        height = new int[N];
+        obstacle = new int[H + 1];
+        minObstacle = N / 2;
 
-        for (int i = 0; i < N; i++) {
-            arr[i] = Integer.parseInt(br.readLine());
+        for (int i = 0; i < N; i += 2) {
+            height[i] = Integer.parseInt(br.readLine());
+            height[i + 1] = Integer.parseInt(br.readLine());
         }
 
-        int start = 1;
-        int end = H;
-        int mid;
-        int obstacle;
-        // 높이가 1, H일때 장애물이 중간 높이보다 적은 경우 -> 끝부터 중간으로 검사
-        // 높이가 1, H일때 장애물이 중간 높이보다 많은 경우 -> 중간부터 끝으로 검사
-        while (start <= end) {
-            mid = (start + end) / 2;
-            obstacle = 0;
+        binarySearch(1, H);
 
-            for (int i = 0; i < N; i ++) {
-                if (i % 2 == 0) {
-                    // 석순
-                    if (arr[i] <= mid) obstacle++;
-                } else {
-                    // 종유석
-                    if (arr[i] + mid > H) obstacle++;
-                }
-            }
+        System.out.println(minObstacle + " " + num);
+    }
 
-            /// 더 적은 장애물
-            if (obstacle < min) {
-                min = obstacle;
-                minNum = 1;
-            }
+    public static void binarySearch(int start, int end) {
+        int mid = (start + end) / 2;
+        if (start > end || mid == start || mid == end) return;
+
+        for (int i = 0; i < N; i += 2) {
+            // 석순
+            if (height[i] >= mid) obstacle[mid]++;
+            // 종유석
+            if (height[i + 1] <= mid) obstacle[mid]++;
         }
 
-        System.out.println(min + " " + minNum);
+        if (obstacle[mid] == minObstacle) {
+            num++;
+        } else {
+            minObstacle = obstacle[mid];
+            num = 1;
+        }
+        binarySearch(start, mid);
+        binarySearch(mid + 1, end);
     }
 }
