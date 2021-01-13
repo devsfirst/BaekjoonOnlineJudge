@@ -3,6 +3,6 @@
 [문제 번호] 파일 이름
 
 ### 커밋 메시지
-+ 정답: correct + description
++ 정답: correct + review
 + 실패: wrong(원인)
 + 미해결: solving
